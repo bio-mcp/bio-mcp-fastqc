@@ -1,0 +1,18 @@
+{
+    "tool_name": "blast",
+    "tool_version": "latest",
+    "ToolName": "{{ cookiecutter.tool_name.title().replace('-', '').replace('_', '') }}",
+    "TOOL_NAME": "{{ cookiecutter.tool_name.upper().replace('-', '_') }}",
+    "tool_description": "Brief description of the tool",
+    "tool_main_description": "Main functionality description for the primary tool command",
+    "tool_main_functionality": "what the tool does in context of AI assistance",
+    "input_extension": "fasta",
+    "param_name": "database",
+    "param_type": "string",
+    "param_description": "Database to search against",
+    "feature_1": "Feature 1 description",
+    "feature_2": "Feature 2 description",
+    "author_name": "Your Name",
+    "author_email": "your.email@example.com",
+    "github_user": "yourusername"
+}

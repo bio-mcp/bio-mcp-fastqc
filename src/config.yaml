@@ -1,0 +1,27 @@
+# Configuration for {{tool_name}} MCP server
+server:
+  name: "bio-mcp-{{tool_name}}"
+  version: "0.1.0"
+
+# Tool-specific settings
+{{tool_name}}:
+  executable_path: "{{tool_name}}"
+  default_parameters:
+    # Add default parameters here
+    # example_param: "value"
+
+# Processing limits
+limits:
+  max_file_size: 100_000_000  # 100MB
+  timeout: 300  # 5 minutes
+  max_concurrent_jobs: 5
+
+# Temporary file handling
+storage:
+  temp_dir: null  # Uses system temp by default
+  cleanup_on_exit: true
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
