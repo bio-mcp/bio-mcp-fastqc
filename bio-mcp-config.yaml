@@ -1,0 +1,108 @@
+# Bio-MCP Configuration File
+# This file allows you to configure tool execution preferences for HPC/cluster environments
+
+# Global execution mode settings
+execution:
+  # Force a specific execution mode for all tools
+  # Options: native, module, lmod, singularity, docker
+  # Leave empty to use automatic detection
+  force_mode: null
+  
+  # Preferred execution modes in order of preference
+  # The system will try these modes in order until one works
+  preferred_modes:
+    - native      # Tool available in PATH
+    - module      # Tool available via Environment Modules
+    - lmod        # Tool available via Lmod
+    - singularity # Tool available via Singularity container
+    - docker      # Tool available via Docker container
+
+# Module system settings
+modules:
+  # Additional paths to search for modules
+  search_paths: []
+  
+  # Tool-specific module names
+  tool_modules:
+    blast: ["blast", "blast+", "ncbi-blast+"]
+    samtools: ["samtools", "SAMtools"]
+    bwa: ["bwa", "BWA"]
+    bedtools: ["bedtools", "BEDTools"]
+    fastqc: ["fastqc", "FastQC"]
+    seqkit: ["seqkit", "SeqKit"]
+    bcftools: ["bcftools", "BCFtools"]
+    interpro: ["interproscan", "InterProScan"]
+
+# Container settings
+containers:
+  # Singularity settings
+  singularity:
+    # Path to directory containing Singularity images
+    image_path: null
+    # Custom image names
+    images:
+      blast: "biocontainers/blast:2.15.0"
+      samtools: "biocontainers/samtools:1.19.2"
+      bwa: "biocontainers/bwa:0.7.17"
+      bedtools: "biocontainers/bedtools:2.31.1"
+      fastqc: "quay.io/biocontainers/fastqc:0.12.1"
+      seqkit: "biocontainers/seqkit:2.8.1"
+      bcftools: "biocontainers/bcftools:1.19"
+      interpro: "biocontainers/interproscan:5.63_95.0"
+  
+  # Docker settings
+  docker:
+    # Docker image prefix/registry
+    registry: "biocontainers"
+    # Custom image names
+    images:
+      blast: "biocontainers/blast:2.15.0"
+      samtools: "biocontainers/samtools:1.19.2"
+      bwa: "biocontainers/bwa:0.7.17"
+      bedtools: "biocontainers/bedtools:2.31.1"
+      fastqc: "quay.io/biocontainers/fastqc:0.12.1"
+      seqkit: "biocontainers/seqkit:2.8.1"
+      bcftools: "biocontainers/bcftools:1.19"
+      interpro: "biocontainers/interproscan:5.63_95.0"
+
+# Performance settings
+performance:
+  # Maximum file size for processing (in bytes)
+  max_file_size: 100000000  # 100MB
+  
+  # Command timeout (in seconds)
+  timeout: 300  # 5 minutes
+  
+  # Temporary directory for processing
+  temp_dir: null  # Uses system default
+
+# Logging settings
+logging:
+  level: INFO
+  log_execution_commands: true
+  log_tool_detection: true
+
+# Tool-specific overrides
+# You can override settings for specific tools
+tool_overrides:
+  blast:
+    # Force BLAST to use modules if available
+    execution_mode: module
+    timeout: 600  # 10 minutes for longer BLAST jobs
+  
+  fastqc:
+    # FastQC can handle larger files
+    max_file_size: 10000000000  # 10GB
+    timeout: 1800  # 30 minutes
+  
+  interpro:
+    # InterProScan typically needs more time
+    timeout: 3600  # 1 hour
+
+# Environment variables
+# These will be set when executing tools
+environment:
+  # Common bioinformatics environment variables
+  NCBI_DATA_PATH: null
+  BLAST_DB_PATH: null
+  INTERPRO_DATA_PATH: null
